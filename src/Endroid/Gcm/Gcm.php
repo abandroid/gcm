@@ -2,6 +2,9 @@
 
 namespace Endroid\Gcm;
 
+use Buzz\Browser;
+use Buzz\Client\Curl;
+
 class Gcm
 {
     /**
@@ -41,18 +44,8 @@ class Gcm
             'data' => $data,
         );
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-        $response = curl_exec($ch);
-
-        curl_close($ch);
+        $buzz = new Browser(new Curl());
+        $response = $buzz->post($this->apiUrl, $headers, json_encode($data));
 
         return $response;
     }
