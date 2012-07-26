@@ -1,3 +1,3 @@
-Endroid GCM
-===========
+Endroid Google Cloud Messaging
+==============================
 
