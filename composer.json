@@ -1,0 +1,23 @@
+{
+    "name": "endroid/gcm",
+    "description": "Endroid Google Cloud Messaging",
+    "keywords": ["endroid", "gcm", "push", "notification", "notifications", "google", "cloud", "messaging"],
+    "homepage": "https://github.com/endroid/gcm",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen van den Enden",
+            "email": "info@endroid.nl",
+            "homepage": "http://endroid.nl/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Sudoku": "lib/"
+        }
+    }
+}
