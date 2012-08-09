@@ -3,7 +3,6 @@
 namespace Endroid\Gcm;
 
 use Buzz\Browser;
-use Buzz\Client\Curl;
 use Buzz\Client\MultiCurl;
 
 class Gcm
@@ -24,6 +23,11 @@ class Gcm
     protected $registrationIdMaxCount = 1000;
 
     /**
+     * @var \Buzz\Browser
+     */
+    protected $browser;
+
+    /**
      * @var array
      */
     protected $responses;
@@ -36,11 +40,13 @@ class Gcm
      */
     public function __construct($apiKey, $apiUrl = null)
     {
-        $this->apiKey    = $apiKey;
+        $this->apiKey = $apiKey;
 
         if ($apiUrl) {
             $this->apiUrl = $apiUrl;
         }
+
+        $this->browser = new Browser(new MultiCurl());
     }
 
     /**
@@ -61,28 +67,16 @@ class Gcm
             'data' => $data,
         );
 
-        // Chunk number of registration ID's according to maximum allowed by GCM
+        // Chunk number of registration ID's according to the maximum allowed by GCM
         $chunks = array_chunk($registrationIds, $this->registrationIdMaxCount);
 
-        // Create the suitable client and browser
-        if (count($chunks) > 1) {
-            $client = new MultiCurl();
-        } else {
-            $client = new Curl();
-        }
-        $buzz = new Browser($client);
-
-        // Perform or enqueue the GCM request(s)
+        // Perform the calls (in parallel)
         $this->responses = array();
         foreach ($chunks as $registrationIds) {
             $data['registration_ids'] = $registrationIds;
-            $this->responses[] = $buzz->post($this->apiUrl, $headers, json_encode($data));
+            $this->responses[] = $this->browser->post($this->apiUrl, $headers, json_encode($data));
         }
-
-        // In case of MultiCurl: flush all GCM requests
-        if ($client instanceof MultiCurl) {
-            $client->flush();
-        }
+        $this->browser->getClient()->flush();
 
         // Determine success
         foreach ($this->responses as $response) {
