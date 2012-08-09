@@ -12,7 +12,7 @@ to circumvent the maximum imposed by Google. So you don't have to bother about t
 ```php
 <?php
 
-$gcm = new Endroid\Gcm($apiKey);
+$gcm = new Endroid\Gcm\Gcm($apiKey);
 
 // Registration ID's of devices to target
 $registrationIds = array(
