@@ -52,20 +52,21 @@ class Gcm
     /**
      * Sends the data to the given registration ID's via the GCM server
      *
-     * @param $data
-     * @param $registrationIds
-     * @return \Buzz\Response
+     * @param mixed $data
+     * @param array $registrationIds
+     * @param array $options to add along with message, such as collapse_key, time_to_live, delay_while_idle
+     * @return bool
      */
-    public function send($data, $registrationIds)
+    public function send($data, array $registrationIds, array $options = array())
     {
         $headers = array(
             'Authorization: key='.$this->apiKey,
             'Content-Type: application/json'
         );
 
-        $data = array(
+        $data = array_merge($options, array(
             'data' => $data,
-        );
+        ));
 
         // Chunk number of registration ID's according to the maximum allowed by GCM
         $chunks = array_chunk($registrationIds, $this->registrationIdMaxCount);
@@ -87,5 +88,13 @@ class Gcm
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponses()
+    {
+        return $this->responses;
     }
 }
