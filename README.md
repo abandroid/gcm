@@ -26,3 +26,7 @@ $data = array(
 
 $success = $gcm->send($data, $registrationIds);
 ```
+
+## Symfony
+
+You can use [`GcmBundle`](https://github.com/endroid/GcmBundle) to enable this service in your Symfony applications.
