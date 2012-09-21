@@ -25,7 +25,11 @@ $data = array(
 );
 
 $success = $gcm->send($data, $registrationIds);
+
 ```
+
+If something went wrong or if you just want to inspect the response objects returned by the GCM server, you can retrieve
+these using the getResponses() method.
 
 ## Symfony
 
