@@ -3,7 +3,7 @@
 namespace Endroid\Gcm;
 
 use Buzz\Browser;
-use Buzz\Client\MultiCurl;
+use Buzz\Client\Curl;
 
 class Gcm
 {
@@ -46,7 +46,7 @@ class Gcm
             $this->apiUrl = $apiUrl;
         }
 
-        $this->browser = new Browser(new MultiCurl());
+        $this->browser = new Browser(new Curl());
     }
 
     /**
@@ -77,7 +77,7 @@ class Gcm
             $data['registration_ids'] = $registrationIds;
             $this->responses[] = $this->browser->post($this->apiUrl, $headers, json_encode($data));
         }
-        $this->browser->getClient()->flush();
+        //$this->browser->getClient()->flush();
 
         // Determine success
         foreach ($this->responses as $response) {
