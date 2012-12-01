@@ -33,4 +33,4 @@ these using the getResponses() method.
 
 ## Symfony
 
-You can use [`GcmBundle`](https://github.com/endroid/GcmBundle) to enable this service in your Symfony applications.
+You can use [`EndroidGcmBundle`](https://github.com/endroid/EndroidGcmBundle) to enable this service in your Symfony application.

@@ -36,7 +36,7 @@ class Gcm
      * Class constructor
      *
      * @param $apiKey
-     * @param null $baseUrl
+     * @param null $apiUrl
      */
     public function __construct($apiKey, $apiUrl = null)
     {

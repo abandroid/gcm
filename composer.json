@@ -2,7 +2,7 @@
     "name": "endroid/gcm",
     "description": "Endroid Google Cloud Messaging",
     "keywords": ["endroid", "gcm", "push", "notification", "notifications", "google", "cloud", "messaging"],
-    "homepage": "https://github.com/endroid/gcm",
+    "homepage": "https://github.com/endroid/Gcm",
     "type": "library",
     "license": "MIT",
     "authors": [
