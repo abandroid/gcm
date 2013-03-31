@@ -1,6 +1,8 @@
 Endroid Google Cloud Messaging
 ==============================
 
+*By [endroid](http://endroid.nl/)*
+
 [![Build Status](https://secure.travis-ci.org/endroid/Gcm.png)](http://travis-ci.org/endroid/Gcm)
 
 Google Cloud Messaging is a service that helps developers send data from servers to their Android applications on
@@ -34,3 +36,8 @@ these using the getResponses() method.
 ## Symfony
 
 You can use [`EndroidGcmBundle`](https://github.com/endroid/EndroidGcmBundle) to enable this service in your Symfony application.
+
+## License
+
+This bundle is under the MIT license. For the full copyright and license information, please view the LICENSE file that
+was distributed with this source code.
