@@ -54,6 +54,7 @@ class Gcm
         }
 
         $this->browser = new Browser(new MultiCurl());
+        $this->browser->getClient()->setVerifyPeer(false);
     }
 
     /**
