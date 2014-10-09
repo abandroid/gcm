@@ -40,6 +40,18 @@ class Gcm
     protected $responses;
 
     /**
+     * Sent registration ids 
+     * @var array
+     */
+    protected $registrationIds = array();
+
+    /**
+     * Associatives array for id => errors
+     * @var array
+     */
+    protected $registrationErrors;
+
+    /**
      * Class constructor
      *
      * @param $apiKey
@@ -67,6 +79,8 @@ class Gcm
      */
     public function send($data, array $registrationIds, array $options = array())
     {
+        $this->registrationIds = $registrationIds;
+        
         $headers = array(
             'Authorization: key='.$this->apiKey,
             'Content-Type: application/json'
@@ -96,6 +110,29 @@ class Gcm
         }
 
         return true;
+    }
+    
+    /**
+     * Return Ids associated with errors
+     *
+     * @return array RegistrationIds => Error
+     */
+    public function getRegistrationIdsAssociatedResponse(){
+        $this->registrationErrors = array();
+        $i = 0;
+        foreach ($this->responses as $response) {
+            $message = json_decode($response->getContent());
+            if ($message !== null && isset($message->results)){
+                foreach($message->results as $result){
+                    if (isset($this->registrationIds[$i]) && isset($result->error)){
+                        $device_id = $this->registrationIds[$i];
+                        $this->registrationErrors[$device_id] = $result->error;
+                        $i++;
+                    }
+                }
+            }
+        }
+        return $this->registrationErrors;
     }
 
     /**
