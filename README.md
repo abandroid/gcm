@@ -16,7 +16,9 @@ to circumvent the maximum imposed by Google. So you don't have to bother about t
 ```php
 <?php
 
-$gcm = new Endroid\Gcm\Gcm($apiKey);
+use Endroid\Gcm\Client;
+
+$client = new Client($apiKey);
 
 // Registration ID's of devices to target
 $registrationIds = array(
@@ -28,7 +30,7 @@ $data = array(
     'message' => 'Message body',
 );
 
-$success = $gcm->send($data, $registrationIds);
+$success = $client->send($data, $registrationIds);
 
 ```
 

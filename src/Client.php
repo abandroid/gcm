@@ -12,7 +12,7 @@ namespace Endroid\Gcm;
 use Buzz\Browser;
 use Buzz\Client\MultiCurl;
 
-class Gcm
+class Client
 {
     /**
      * @var string
@@ -40,7 +40,7 @@ class Gcm
     protected $responses;
 
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param $apiKey
      * @param null $apiUrl
@@ -58,18 +58,19 @@ class Gcm
     }
 
     /**
-     * Sends the data to the given registration ID's via the GCM server
+     * Sends the data to the given registration ID's via the GCM server.
      *
      * @param mixed $data
      * @param array $registrationIds
-     * @param array $options to add along with message, such as collapse_key, time_to_live, delay_while_idle
+     * @param array $options         to add along with message, such as collapse_key, time_to_live, delay_while_idle
+     *
      * @return bool
      */
     public function send($data, array $registrationIds, array $options = array())
     {
         $headers = array(
             'Authorization: key='.$this->apiKey,
-            'Content-Type: application/json'
+            'Content-Type: application/json',
         );
 
         $data = array_merge($options, array(

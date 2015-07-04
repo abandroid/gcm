@@ -14,7 +14,19 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "kriswallsmith/buzz": "~0.3"
+        "guzzlehttp/guzzle": "~5.0"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "~1.9",
+        "phpunit/phpunit": "~4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Endroid\\Gcm\\": [ "src/", "tests/" ]
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-0": { "Endroid": "src/" }
