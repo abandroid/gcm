@@ -30,7 +30,7 @@ class Client
     protected $registrationIdMaxCount = 1000;
 
     /**
-     * @var \Buzz\Browser
+     * @var Browser
      */
     protected $browser;
 
