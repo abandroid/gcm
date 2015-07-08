@@ -28,9 +28,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "autoload": {
-        "psr-0": { "Endroid": "src/" }
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
