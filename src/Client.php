@@ -100,7 +100,7 @@ class Client
     }
 
     /**
-     * Sends the data vía to method topic via the GCM server.
+     * Sends the data to the given registration token, notification key, or topic via the GCM server.
      *
      * @param mixed $data
      * @param String $topic          The value must be a registration token, notification key, or topic. Default global topic.
