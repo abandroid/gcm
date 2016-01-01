@@ -74,7 +74,7 @@ class Client
         );
 
         $data = array_merge($options, array(
-            'data' => $data
+            'data' => $data,
         ));
 
         // Chunk number of registration ID's according to the maximum allowed by GCM
@@ -102,13 +102,13 @@ class Client
     /**
      * Sends the data to the given registration token, notification key, or topic via the GCM server.
      *
-     * @param mixed $data
-     * @param String $topic          The value must be a registration token, notification key, or topic. Default global topic.
-     * @param array $options         to add along with message, such as collapse_key, time_to_live, delay_while_idle
+     * @param mixed  $data
+     * @param string $topic   The value must be a registration token, notification key, or topic. Default global topic.
+     * @param array  $options to add along with message, such as collapse_key, time_to_live, delay_while_idle
      *
      * @return bool
      */
-    public function sendTo($data, $topic = "/topics/global", array $options = array())
+    public function sendTo($data, $topic = '/topics/global', array $options = array())
     {
         $headers = array(
             'Authorization: key='.$this->apiKey,
@@ -116,7 +116,7 @@ class Client
         );
         $data = array_merge($options, array(
             'data' => $data,
-            'to' => $topic
+            'to' => $topic,
         ));
 
         // Perform the calls (in parallel)
@@ -125,9 +125,10 @@ class Client
 
         // Determine success
         $message = json_decode($this->responses[0]->getContent(), true);
-        if ($message === null || !array_key_exists("message_id",$message) || array_key_exists("failure",$message)) {
+        if ($message === null || !array_key_exists('message_id', $message) || array_key_exists('failure', $message)) {
             return false;
         }
+
         return true;
     }
 
