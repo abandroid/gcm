@@ -16,10 +16,6 @@
         "php": ">=5.3.0",
         "kriswallsmith/buzz": "~0.3"
     },
-    "require-dev": {
-        "fabpot/php-cs-fixer": "~1.0",
-        "phpunit/phpunit": "~4.0"
-    },
     "autoload": {
         "psr-4": {
             "Endroid\\Gcm\\": [ "src/", "tests/" ]
