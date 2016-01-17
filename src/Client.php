@@ -61,7 +61,6 @@ class Client
 
         $this->client = new MultiCurl();
         $this->client->setVerifyPeer(false);
-        $this->client->setTimeout(5);
         $this->browser = new Browser($this->client);
     }
 
