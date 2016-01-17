@@ -11,6 +11,7 @@ namespace Endroid\Gcm;
 
 use Buzz\Browser;
 use Buzz\Client\MultiCurl;
+use Buzz\Message\Response;
 
 class Client
 {
@@ -30,12 +31,17 @@ class Client
     protected $registrationIdMaxCount = 1000;
 
     /**
+     * @var MultiCurl
+     */
+    protected $client;
+
+    /**
      * @var Browser
      */
     protected $browser;
 
     /**
-     * @var array
+     * @var Response[]
      */
     protected $responses;
 
@@ -53,42 +59,43 @@ class Client
             $this->apiUrl = $apiUrl;
         }
 
-        $this->browser = new Browser(new MultiCurl());
-        $this->browser->getClient()->setVerifyPeer(false);
+        $this->client = new MultiCurl();
+        $this->client->setVerifyPeer(false);
+        $this->client->setTimeout(5);
+        $this->browser = new Browser($this->client);
     }
 
     /**
-     * Sends the data to the given registration ID's via the GCM server.
+     * Sends the message via the GCM server.
      *
      * @param mixed $data
      * @param array $registrationIds
-     * @param array $options         to add along with message, such as collapse_key, time_to_live, delay_while_idle
+     * @param array $options
      *
      * @return bool
      */
-    public function send($data, array $registrationIds, array $options = array())
+    public function send($data, array $registrationIds = array(), array $options = array())
     {
-        $headers = array(
-            'Authorization: key='.$this->apiKey,
-            'Content-Type: application/json',
-        );
+        $this->responses = array();
 
         $data = array_merge($options, array(
             'data' => $data,
         ));
 
-        // Chunk number of registration ID's according to the maximum allowed by GCM
-        $chunks = array_chunk($registrationIds, $this->registrationIdMaxCount);
-
-        // Perform the calls (in parallel)
-        $this->responses = array();
-        foreach ($chunks as $registrationIds) {
-            $data['registration_ids'] = $registrationIds;
-            $this->responses[] = $this->browser->post($this->apiUrl, $headers, json_encode($data));
+        if (isset($options['to'])) {
+            $this->responses[] = $this->browser->post($this->apiUrl, $this->getHeaders(), json_encode($data));
+        } elseif (count($registrationIds) > 0) {
+            // Chunk number of registration ID's according to the maximum allowed by GCM
+            $chunks = array_chunk($registrationIds, $this->registrationIdMaxCount);
+            // Perform the calls (in parallel)
+            foreach ($chunks as $registrationIds) {
+                $data['registration_ids'] = $registrationIds;
+                $this->responses[] = $this->browser->post($this->apiUrl, $this->getHeaders(), json_encode($data));
+            }
         }
-        $this->browser->getClient()->flush();
 
-        // Determine success
+        $this->client->flush();
+
         foreach ($this->responses as $response) {
             $message = json_decode($response->getContent());
             if ($message === null || $message->success == 0 || $message->failure > 0) {
@@ -110,30 +117,30 @@ class Client
      */
     public function sendTo($data, $topic = '/topics/global', array $options = array())
     {
+        $options['to'] = $topic;
+
+        return $this->send($data, array(), $options);
+    }
+
+    /**
+     * Returns the headers.
+     *
+     * @return array
+     */
+    protected function getHeaders()
+    {
         $headers = array(
             'Authorization: key='.$this->apiKey,
             'Content-Type: application/json',
         );
-        $data = array_merge($options, array(
-            'data' => $data,
-            'to' => $topic,
-        ));
 
-        // Perform the calls (in parallel)
-        $this->responses[] = $this->browser->post($this->apiUrl, $headers, json_encode($data));
-        $this->browser->getClient()->flush();
-
-        // Determine success
-        $message = json_decode($this->responses[0]->getContent(), true);
-        if ($message === null || !array_key_exists('message_id', $message) || array_key_exists('failure', $message)) {
-            return false;
-        }
-
-        return true;
+        return $headers;
     }
 
     /**
-     * @return array
+     * Returns the responses.
+     *
+     * @return Response[]
      */
     public function getResponses()
     {
