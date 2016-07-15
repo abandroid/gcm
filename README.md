@@ -3,9 +3,11 @@ Endroid Google Cloud Messaging
 
 *By [endroid](http://endroid.nl/)*
 
+[![Latest Stable Version](http://img.shields.io/packagist/v/endroid/gcm.svg)](https://packagist.org/packages/endroid/gcm)
 [![Build Status](https://secure.travis-ci.org/endroid/Gcm.png)](http://travis-ci.org/endroid/Gcm)
-[![Latest Stable Version](https://poser.pugx.org/endroid/gcm/v/stable.png)](https://packagist.org/packages/endroid/gcm)
-[![Total Downloads](https://poser.pugx.org/endroid/gcm/downloads.png)](https://packagist.org/packages/endroid/gcm)
+[![Total Downloads](http://img.shields.io/packagist/dt/endroid/gcm.svg)](https://packagist.org/packages/endroid/gcm)
+[![Monthly Downloads](http://img.shields.io/packagist/dm/endroid/gcm.svg)](https://packagist.org/packages/endroid/gcm)
+[![License](http://img.shields.io/packagist/l/endroid/gcm.svg)](https://packagist.org/packages/endroid/gcm)
 
 Google Cloud Messaging is a service that helps developers send data from servers to their Android applications on
 Android devices. See [Google GCM](http://developer.android.com/guide/google/gcm/index.html) for more information.
@@ -43,9 +45,9 @@ You can use [`EndroidGcmBundle`](https://github.com/endroid/EndroidGcmBundle) to
 
 ## Versioning
 
-Version numbers follow the MAJOR.MINOR.PATCH scheme. Backwards compatible
-changes will be kept to a minimum but be aware that these can occur. Lock
-your dependencies for production and test your code when upgrading.
+Version numbers follow the MAJOR.MINOR.PATCH scheme. Backwards compatibility
+breaking changes will be kept to a minimum but be aware that these can occur.
+Lock your dependencies for production and test your code when upgrading.
 
 ## License
 
