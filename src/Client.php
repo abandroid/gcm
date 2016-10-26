@@ -77,9 +77,7 @@ class Client
     {
         $this->responses = array();
 
-        $data = array_merge($options, array(
-            'data' => $data,
-        ));
+        $data = !empty($data) ? array_merge($options, array('data' => $data)) : array();
 
         if (isset($options['to'])) {
             $this->responses[] = $this->browser->post($this->apiUrl, $this->getHeaders(), json_encode($data));
