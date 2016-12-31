@@ -35,8 +35,6 @@ $success = $client->send($data, $registrationIds);
 
 ```
 
-You can find the API key 
-
 If something went wrong or if you just want to inspect the response objects returned by the GCM server, you can retrieve
 these using the getResponses() method.
 
@@ -61,7 +59,7 @@ The default parameters can be overridden via the configuration.
 
 ```yaml
 endroid_gcm:
-    api_key: "Your API Key"
+    api_key: "..."
 ```
 
 Now you can retrieve your GCM client as follows.
