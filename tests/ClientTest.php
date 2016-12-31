@@ -7,10 +7,6 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\Tests\Gcm;
-
-use PHPUnit_Framework_TestCase;
-
 class ClientTest extends PHPUnit_Framework_TestCase
 {
     public function testNoTestsYet()

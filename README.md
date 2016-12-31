@@ -18,7 +18,7 @@ to circumvent the maximum imposed by Google. So you don't have to bother about t
 ```php
 use Endroid\Gcm\Client;
 
-$apiKey = '...'
+$apiKey = '...';
 $client = new Client($apiKey);
 
 // Registration ID's of devices to target
@@ -40,7 +40,7 @@ these using the getResponses() method.
 
 ## Symfony integration
 
-Register the Symfony bundle int the kernel.
+Register the Symfony bundle in the kernel.
 
 ```php
 // app/AppKernel.php
@@ -62,7 +62,7 @@ endroid_gcm:
     api_key: "..."
 ```
 
-Now you can retrieve your GCM client as follows.
+Now you can retrieve the client as follows.
 
 ```php
 $client = $this->get('endroid.gcm.client');
