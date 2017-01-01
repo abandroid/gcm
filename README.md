@@ -32,7 +32,6 @@ $data = array(
 );
 
 $success = $client->send($data, $registrationIds);
-
 ```
 
 If something went wrong or if you just want to inspect the response objects returned by the GCM server, you can retrieve
@@ -52,21 +51,19 @@ public function registerBundles()
         new Endroid\Gcm\Bundle\EndroidGcmBundle(),
     ];
 }
-
 ```
 
 The default parameters can be overridden via the configuration.
 
 ```yaml
 endroid_gcm:
-    api_key: "..."
+    api_key: '...'
 ```
 
 Now you can retrieve the client as follows.
 
 ```php
 $client = $this->get('endroid.gcm.client');
-
 ```
 
 ## Versioning
