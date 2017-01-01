@@ -26,10 +26,10 @@ $registrationIds = [
     //...
 ];
 
-$data = array(
+$data = [
     'title' => 'Message title',
     'message' => 'Message body',
-);
+];
 
 $success = $client->send($data, $registrationIds);
 ```

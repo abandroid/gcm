@@ -28,6 +28,6 @@ class EndroidGcmExtension extends Extension
         $loader->load('services.yml');
 
         $serviceDefinition = $container->getDefinition('endroid.gcm.client');
-        $serviceDefinition->setArguments(array($config['api_key'], $config['api_url']));
+        $serviceDefinition->setArguments([$config['api_key'], $config['api_url']]);
     }
 }

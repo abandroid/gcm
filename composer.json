@@ -25,6 +25,11 @@
             "Endroid\\Gcm\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Endroid\\Gcm\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "bin-dir": "bin"
     },
