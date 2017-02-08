@@ -1,0 +1,3 @@
+services:
+    endroid.gcm.client:
+        class: Endroid\Gcm\Client

@@ -16,32 +16,55 @@ Requests with messages targeting 1000+ registration ID's will automatically be c
 to circumvent the maximum imposed by Google. So you don't have to bother about this restriction when using this class.
 
 ```php
-<?php
-
 use Endroid\Gcm\Client;
 
+$apiKey = '...';
 $client = new Client($apiKey);
 
 // Registration ID's of devices to target
-$registrationIds = array(
-    ...
-);
+$registrationIds = [
+    //...
+];
 
-$data = array(
+$data = [
     'title' => 'Message title',
     'message' => 'Message body',
-);
+];
 
 $success = $client->send($data, $registrationIds);
-
 ```
 
 If something went wrong or if you just want to inspect the response objects returned by the GCM server, you can retrieve
 these using the getResponses() method.
 
-## Symfony
+## Symfony integration
 
-You can use [`EndroidGcmBundle`](https://github.com/endroid/EndroidGcmBundle) to enable this service in your Symfony application.
+Register the Symfony bundle in the kernel.
+
+```php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = [
+        // ...
+        new Endroid\Gcm\Bundle\EndroidGcmBundle(),
+    ];
+}
+```
+
+The default parameters can be overridden via the configuration.
+
+```yaml
+endroid_gcm:
+    api_key: '...'
+```
+
+Now you can retrieve the client as follows.
+
+```php
+$client = $this->get('endroid.gcm.client');
+```
 
 ## Versioning
 

@@ -7,10 +7,10 @@
  * with this source code in the file LICENSE.
  */
 
-class ClientTest extends PHPUnit_Framework_TestCase
+namespace Endroid\Gcm\Bundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class EndroidGcmBundle extends Bundle
 {
-    public function testNoTestsYet()
-    {
-        $this->assertTrue(true);
-    }
 }

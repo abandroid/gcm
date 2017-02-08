@@ -73,9 +73,9 @@ class Client
      *
      * @return bool
      */
-    public function send($data, array $registrationIds = array(), array $options = array())
+    public function send($data, array $registrationIds = [], array $options = [])
     {
-        $this->responses = array();
+        $this->responses = [];
 
         $data = !empty($data) ? array_merge($options, array('data' => $data)) : $options;
 
@@ -112,11 +112,11 @@ class Client
      *
      * @return bool
      */
-    public function sendTo($data, $topic = '/topics/global', array $options = array())
+    public function sendTo($data, $topic = '/topics/global', array $options = [])
     {
         $options['to'] = $topic;
 
-        return $this->send($data, array(), $options);
+        return $this->send($data, [], $options);
     }
 
     /**
@@ -126,10 +126,10 @@ class Client
      */
     protected function getHeaders()
     {
-        $headers = array(
+        $headers = [
             'Authorization: key='.$this->apiKey,
             'Content-Type: application/json',
-        );
+        ];
 
         return $headers;
     }
